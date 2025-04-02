@@ -102,6 +102,20 @@ class CalculatorTest {
         calc.pressNegativeKey(); // zurück zu 5
         assertEquals("5", calc.readScreen());
     }
+    @Test
+    @DisplayName("should clear only screen on first clear press, not memory")
+    void testClearKeyClearsOnlyScreen() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(8);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(3);
+        calc.pressClearKey(); // sollte nur Bildschirm zurücksetzen
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        assertEquals("10", calc.readScreen()); // 8 + 2
+    }
 
 }
 
